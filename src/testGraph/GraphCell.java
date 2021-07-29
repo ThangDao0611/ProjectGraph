@@ -1,11 +1,15 @@
 package testGraph;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 
 import org.graphstream.graph.Graph;
 
+
 public class GraphCell {
-	LinkedList<Cell> graphCells = new LinkedList<>();
+	private LinkedList<Cell> graphCells = new LinkedList<>();
 	public GraphCell() {
 		// TODO Auto-generated constructor stub
 	}
@@ -43,6 +47,28 @@ public class GraphCell {
 		return false;
 	}
 	
+	public int getIdWithValue(int value) {
+		int i=0;
+		for(Cell tmp: graphCells) {
+			if(tmp.getValue() == value) {
+				return i;
+			}
+			i++;
+		}
+		
+		return -1;
+	}
+	
+	public List<Integer> getListVertical(int vertical){
+		List<Integer> list = new ArrayList<>();
+		for(Cell cellCheck:this.graphCells) {
+			if(cellCheck.getValue() == vertical) {
+				list = cellCheck.getListVertical();
+			}
+		}
+		return list;
+	}
+	
 	public void traverGraphToAddGraph(Graph graph) {
 		for(Cell cellCheck:this.graphCells) {
 			String cellNode = String.valueOf(cellCheck.getValue());
@@ -60,6 +86,7 @@ public class GraphCell {
 					graph.addEdge(edgeName,cellNode,verNode,true);
 				}
 				else {
+					//System.out.println(verNode);
 					graph.addNode(verNode);
 					graph.addEdge(edgeName,cellNode,verNode,true);
 				}
@@ -67,16 +94,35 @@ public class GraphCell {
 		}
 	}
 	
-	public void traverGraph() {
+	public List<Integer> traverGraphGetBigSmall() {
+		List<Integer> list = new ArrayList<>();
+		int min = this.graphCells.get(0).getValue();
+		int max = min;
 		for(Cell cellCheck:this.graphCells) {
-			String cellNode = String.valueOf(cellCheck.getValue());
-			System.out.println(cellNode);
-			for(Integer i:cellCheck.getListVertical()) {
-				String verNode = String.valueOf(i);
-				String edgeName = cellNode + verNode;
-				System.out.println(verNode);
+			int cellNode = cellCheck.getValue();
+			if(cellNode > max) {
+				max = cellNode;
+			}
+			if(cellNode < min) {
+				min = cellNode;
 			}
 		}
+		list.add(min);
+		list.add(max);
+		return list;
+	}
+	
+	public List<Integer> traverGraphGetList() {
+		List<Integer> list = new ArrayList<>();
+		for(Cell cellCheck:this.graphCells) {
+			//String cellNode = String.valueOf(cellCheck.getValue());
+			list.add(cellCheck.getValue());
+		}
+		Collections.sort(list);
+		return list;
 	}
 
+	public LinkedList<Cell> getGraphCells() {
+		return graphCells;
+	}
 }

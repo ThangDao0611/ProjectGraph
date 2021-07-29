@@ -1,0 +1,27 @@
+.button
+{
+	-fx-background-color: #E5E5E5;
+	-fx-text-fill: #383838;
+}
+
+.button:hover
+{
+	-fx-background-color: #E5E5E5;
+	-fx-text-fill: #000;
+}
+
+.button:pressed
+{
+	-fx-background-color: #E5E5E5;
+	-fx-text-fill: #364FCD;
+}
+
+.split-pane:horizontal > .split-pane-divider
+{
+	-fx-background-color: transparent;
+}
+
+.split-pane:vertical > .split-pane-divider
+{
+	-fx-background-color: transparent;
+}

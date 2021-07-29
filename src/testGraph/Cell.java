@@ -13,7 +13,6 @@ public class Cell {
 	}
 	
 	public void addEdge(int edge) {
-		//ListIterator<Integer> itr = vertical.listIterator();
 		int check = 0;
 		if(this.vertical != null) {
 			for(Integer i:vertical) {
